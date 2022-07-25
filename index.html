@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -28,17 +28,36 @@
 
 
     <main>
-        <div class="games">
-            <h2 class="bet-text">NEW BET<span class="game-bet-text"></span></h2>
-            <h4 class="game-subtitle">Choose a game</h4>
+        <section>
+
+            <div class="games">
+                <h2 class="bet-text">NEW BET<span class="game-bet-text"></span></h2>
+                <h4 class="game-subtitle">Choose a game</h4>
+        
+                <div class="game-description">
+                    <h4 class="fill-info">Fill your bet</h4>
+                    <span class="game-description"></span>
+                </div>
     
-            <div class="game-description">
-                <h4 class="fill-info">Fill your bet</h4>
-                <span class="game-description"></span>
             </div>
 
-        </div>
+
+            <div class="list-of-games"></div>
+
+            <div class="games-list-numbers"></div>
+
+            <div class="games-button">
+                <div class="games-options">
+                <button class="game-options-complete">Complete Gamer</button>
+                <button class="game-options-clear">Clear Game</button>
+            </div>
+
+        
+
+        </section>
+        
             
+
 
 
 
@@ -48,9 +67,17 @@
 
     <section>
         <footer>
-            Copyright 2022 Luby Software
+            <div id="current_date"></p>
+                <script>
+
+                date = new Date();
+                year = date.getFullYear();
+                document.getElementById("current_date").innerHTML = 'Copyright ' + year + ' Luby Software';
+
+                </script>
         </footer>
     </section>
 
+<script src="scripts.js"></script>
 </body>
 </html>
