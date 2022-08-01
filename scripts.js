@@ -4,7 +4,9 @@
 
 var listGames=[];
 var selectedGame;
-var ListOfGames = getElementAttributes('[class=list-of-games]');
+//var ListOfGames = getElementAttributes('[class=list-of-games]');
+
+
 
 function getElementAttributes(attributes){
     return document.querySelector(attributes);
@@ -15,22 +17,42 @@ function initialGameSelect(){
     document.querySelector('[class="game-choose-button"]').click();
   }
 
-function getGames(){
-    var request = new XMLHttpRequest();
-    request.open('GET', games.json);
-    request.responseType = 'json';
-    request.send();
 
-    request.onreadystatechange = ()=>{
-        if(request.readyState==4 && request.status === 200){
-            listGames.push(JSON.parse(request.responseText).types);
-            createGamesListButtons();
-            initialGameSelect();
-        }
-    }
+  
+const getGames = async () => {
+    let response = await fetch("games.json");
+    let values = await response.json();
+    listGames.push(values);
+    ////////////
+    capeta_exite();
 }
 
+getGames();
 
+function capeta_exite(){
+    
+listGames[0].types.map((game)=>{
+
+    var teste=document.createElement('h3');
+    teste.innerText=game.description;
+    var description=document.querySelector('[class="game-description"]')
+    description.appendChild(teste);
+
+})
+}
+
+// teste();
+
+
+
+function teste(){
+    try {
+        console.log(listGames);
+    
+    } catch (error) {
+        console.log("erro");   
+    }
+}
 
 function selectedGame(gameName){
     selectedGame = listGames[0].filter(game => game.type === gameName);
@@ -44,5 +66,6 @@ function addDescription(){
 
 }
 
-getGames();
+
+
 })(window,document);
