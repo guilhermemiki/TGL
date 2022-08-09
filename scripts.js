@@ -4,8 +4,7 @@
 
 var listGames=[];
 var selectedGame;
-//var ListOfGames = getElementAttributes('[class=list-of-games]');
-
+var $divListGames = getElementAttributes('[class=list-of-games]');
 
 
 function getElementAttributes(attributes){
@@ -24,47 +23,49 @@ const getGames = async () => {
     let values = await response.json();
     listGames.push(values);
     ////////////
-    capeta_exite();
+
+
+    gameDescription();
+    createGamesListButtons()
 }
 
 getGames();
 
-function capeta_exite(){
+function gameDescription(){
     
 listGames[0].types.map((game)=>{
 
-    var teste=document.createElement('h3');
-    teste.innerText=game.description;
-    var description=document.querySelector('[class="game-description"]')
-    description.appendChild(teste);
+    var descr=document.createElement('h3');
+    descr.innerText=game.description;
+    var description=document.querySelector('[class="game-description"]');
+    
+    description.appendChild(descr);
 
 })
 }
 
-// teste();
+function createGamesListButtons() {
+
+    listGames[0].types.map((game) => {
+      var newButton = document.createElement('button');
+      var newButtonText = document.createTextNode(game.type);
+      newButton.appendChild(newButtonText);
 
 
-
-function teste(){
-    try {
-        console.log(listGames);
+      newButton.setAttribute('class', 'game-choose-button');
+      newButton.setAttribute('game-type', game.type);
     
-    } catch (error) {
-        console.log("erro");   
-    }
-}
 
-function selectedGame(gameName){
-    selectedGame = listGames[0].filter(game => game.type === gameName);
-}
+      newButton.style.border = `solid ${game.color}`;
+      newButton.style.color = game.color;
+      
+      $divListGames.appendChild(newButton);
+    })
+ 
+  }
 
-function addDescription(){
-    var gameDescription = getElement('[class="game-description"]');
-    var gameName = getElement('[class="game-bet-text"]');
-    gameDescription.innerHTML = selectedGame[0].description;
-    gameName.innerHTML = selectedGame[0].type;
 
-}
+
 
 
 
